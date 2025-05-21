@@ -1,0 +1,29 @@
+-- Create college_db
+CREATE DATABASE IF NOT EXISTS college_db;
+USE college_db;
+
+CREATE TABLE colleges (
+    college_id INT PRIMARY KEY,
+    college_name VARCHAR(100)
+);
+
+CREATE TABLE faculty (
+    faculty_id INT PRIMARY KEY,
+    faculty_name VARCHAR(100),
+    research_area VARCHAR(100),
+    college_id INT,
+    FOREIGN KEY (college_id) REFERENCES colleges(college_id)
+);
+
+-- Create pi_db
+CREATE DATABASE IF NOT EXISTS pi_db;
+USE pi_db;
+
+CREATE TABLE pi_list (
+    pi_id INT PRIMARY KEY AUTO_INCREMENT,
+    faculty_name VARCHAR(100),
+    college_id INT,
+    drdo_project_title VARCHAR(200),
+    UNIQUE (faculty_name, college_id),
+    FOREIGN KEY (college_id) REFERENCES college_db.colleges(college_id)
+);
